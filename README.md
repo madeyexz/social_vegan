@@ -15,4 +15,4 @@ retrieve K nearest embedding vectors
 
 **Know Issues**
 - You can't specity homosexual or heterosexual results (it's a bug).
-- Prone to Rate Limit Error, unfixed.
+- [fixed] Prone to Rate Limit Error, 
