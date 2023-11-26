@@ -34,9 +34,12 @@ class Person:
         else:
             ''''NEEDS API COMMUNICATION'''
             print("Word count limit exceeded, please try again")
-        
+            raise ValueError(f"Word count limit exceeded. Limit: {wordcount_limit} words.")
+            
+            
         ''''NEEDS API COMMUNICATION'''
         print(f"{self.id} created successfully")
+        
         
     def __str__(self):
         return f"{self.name} has ID {self.id}."
