@@ -13,3 +13,6 @@ This project ultilizes the OpenAI second generation embedding model `text-embedd
 
 retrieve K nearest embedding vectors
 
+**Know Issues**
+- You can't specity homosexual or heterosexual results (it's a bug).
+- Prone to Rate Limit Error, unfixed.
