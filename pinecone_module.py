@@ -62,7 +62,7 @@ def pinecone_query(index, personid, k) -> None:
             include_metadata = True
         )
 
-    elif hetero == False:
+    else:
         qresult = index.query(
             vector = vector,
             filter = {

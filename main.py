@@ -38,7 +38,7 @@ def main():
     user_exp = db_data_read(user_id, 'expectation', database_path)
     user_match_result =  json.loads(db_data_read(user_id,'match_result_id', database_path)) # matched id and score, enclosed in list
     for i in user_match_result:
-        matched_id, matched_score = i[0], i[1] #TODO json.loads(i)
+        matched_id, matched_score = i[0], i[1]
         if user_id == matched_id:
             continue
         else:
@@ -52,15 +52,6 @@ def main():
         print(result)
         print()
         print()
-
-def test():
-    ids = db_get_all_ids('user.db')
-    user_id = ids[0]
-    database_path = 'user.db'
-    user_match_result =  db_data_read(user_id,'match_result_id', database_path) # matched id and score, enclosed in list)
-    user_match_result_lst = json.loads(user_match_result)
-    for i in user_match_result_lst:
-        print(i)
         
 
 if __name__ == '__main__':
