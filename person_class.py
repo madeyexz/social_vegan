@@ -54,7 +54,22 @@ class Person:
             
         ''''NEEDS API COMMUNICATION'''
         print(f"{self.id} created successfully")
-        
+    
+    def to_dict(self):
+        return {
+            'name': self.name,
+            'id': self.id,
+            'age': self.age,
+            'man': self.man,
+            'hetero': self.hetero,
+            'city': self.city,
+            'email': self.email,
+            'expectation': self.expectation,
+            'wordcount': self.wordcount,
+            'match_result_id': self.match_result_id,
+            'token_cost': self.token_cost,
+            'vector': self.vector
+        }
         
     def __str__(self):
         return f"{self.name} has ID {self.id}."
