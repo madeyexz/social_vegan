@@ -1,10 +1,8 @@
 import sqlite_module # to interact with database
-import openai # to interact with OpenAI API
+import openai
 import os # to access environment variables
 
 # initialize connection to OpenAI (get API key at https://beta.openai.com/)
-openai.api_key = os.environ["OPENAI_API_KEY"]
-
 
 def chatbot_completion(prompt, model="gpt-3.5-turbo-1106", max_tokens=400, temperature=0.4, top_p=1, frequency_penalty=0, presence_penalty=0):
     """
@@ -18,17 +16,20 @@ def chatbot_completion(prompt, model="gpt-3.5-turbo-1106", max_tokens=400, tempe
     :param presence_penalty: Encourages new concepts.
     :return: The completed text.
     """
-    try:
-        response = openai.Completion.create(
-            engine=model,
-            prompt=prompt,
-            max_tokens=max_tokens,
-            temperature=temperature,
-            top_p=top_p,
-            frequency_penalty=frequency_penalty,
-            presence_penalty=presence_penalty
-        )
-        return response.choices[0].text.strip()
+    try:   
+        openai.api_key = os.environ["OPENAI_API_KEY"]
+        response = openai.ChatCompletion.create(
+        model=model,
+        messages=[
+            {"role": "system", "content": "You are a helpful translation assistant."},
+            {"role": "user", "content": "Translate 'hi' in to French"},
+            {"role": "assistant", "content": "Bonjour"},
+            {"role": "user", "content": f"{prompt}."},
+        ],
+        temperature=0,
+    )
+        return response['choices'][0]['message']['content']
+    
     except Exception as e:
         print(f"An error occurred: {e}")
         return None
