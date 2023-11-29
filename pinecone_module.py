@@ -1,9 +1,9 @@
 import pinecone
+from sqlite_module import * # to interact with SQLite database.
 import os
 
 def pinecone_init(index_name: str = 'socialvegan'):
-    # '''initialize connection to pinecone (get API key at app.pinecone.io)'''
-    # index_name = 'notion-database' # assigned as the default value
+    '''initialize connection to Pinecone (get API key at app.pinecone.io)'''
     pinecone.init(
         api_key=os.environ["PINECONE_API_KEY"],
         environment="us-east1-gcp"
@@ -19,12 +19,11 @@ def pinecone_init(index_name: str = 'socialvegan'):
         )
     # connect to index
     index = pinecone.Index(index_name)
-    
-    # print(index.describe_index_stats()) # to view index status
     return index
 
-def pinecone_vector_upsert(person, index):
+def pinecone_vector_upsert(person_id, index):
     '''create the vector of a person in pinecone index'''
+    
     
     index.upsert(
         vectors = [{
@@ -74,3 +73,4 @@ def pinecone_delete_index(index_name: str):
     pinecone.delete_index(index_name)
     print("Deleted index successfully")
     return
+

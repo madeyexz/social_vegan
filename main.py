@@ -44,6 +44,7 @@ def main():
     '''FINDING INFORMATION OF MATCHES'''
 
     for j in qresult:
+        qperson.match_result_id.append(j[0]) # adding matched result into the person database
         best_match = qresult[1]
         himself = qresult[0]
         if j==himself:

@@ -1,4 +1,5 @@
 import openai
+import json # for data storage and retrieval in sqlite
 from tenacity import (
     retry,
     stop_after_attempt,
@@ -56,6 +57,7 @@ class Person:
         print(f"{self.id} created successfully")
     
     def to_dict(self):
+        
         return {
             'name': self.name,
             'id': self.id,
@@ -66,9 +68,10 @@ class Person:
             'email': self.email,
             'expectation': self.expectation,
             'wordcount': self.wordcount,
-            'match_result_id': self.match_result_id,
+            # Serialize list and dict data to JSON for storage
+            'match_result_id': json.dumps(self.match_result_id),
             'token_cost': self.token_cost,
-            'vector': self.vector
+            'vector': json.dumps(self.vector)
         }
         
     def __str__(self):
