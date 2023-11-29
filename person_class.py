@@ -45,7 +45,7 @@ class Person:
                 response = embeddings_with_backoff(self.expectation)
                 self.token_cost = response.usage.total_tokens
                 self.vector = response.data[0].embedding # a list with 1536 elements
-            except openai.error.OpenAIError as e:
+            except openai.OpenAIError as e:
                 print(f"Error: {e}")
                 '''API COMMUNICATIONS HERE'''
         else:
