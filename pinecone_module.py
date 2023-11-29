@@ -74,10 +74,10 @@ def pinecone_query(index, personid, k) -> None:
         
     # result = [[id1, score1], [id2, score2], ...]
     for i in qresult["matches"]:
-        db_data_update(json.dumps([i["id"],i["score"]]), "match_result_id", personid, "user.db")
+        db_matched_id_update(personid, [i["id"],i["score"]], "user.db")
+        # db_data_update(personid, "match_result_id", json.dumps([i["id"],i["score"]]), "user.db")
         
     return None
-
 
 def pinecone_delete_index(index_name: str):
     '''delete the pinecone index'''
@@ -85,3 +85,9 @@ def pinecone_delete_index(index_name: str):
     print("Deleted index successfully")
     return
 
+def main():
+    index = pinecone_init('socialvegan')
+    print(index.describe_index_stats())
+    
+if __name__ == '__main__':
+    main()

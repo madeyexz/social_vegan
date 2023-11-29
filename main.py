@@ -1,70 +1,68 @@
 from person_class import Person
-from pinecone_deployment import *
+from pinecone_module import *
 from json_local_db import *
+from chatbot_module import *
 
 def main():
 
-    pinecone_index = pinecone_init()
-    # print(pinecone_index.describe_index_stats())
+    # preset_data = [["lara",18,False,True,"BJ","A@gmail.com","I am a stone"],["lance",19,True,True,"BJ","B@gmail.com","I am a cat"],["jimmy",25,True,True,"BJ","C@gmail.com","I am a kitten"]]
+    # # initialize the database
+    # db_reset('user.db')
+    # # format the data
+    # for i in preset_data:
+    #     db_data_insert(Person(i[0],i[1],i[2],i[3],i[4],i[5],i[6]).to_dict(),'user.db')
     
-    # a 2d list of id-Person pair, where id = name + email
-    # for each entry in the list, create a person object and upsert the vector into pinecone index
+    # get all ids
+    ids = db_get_all_ids('user.db')
     
-    '''ADDING USER INFORMATION'''
-    preset_data = [["lara",18,False,True,"BJ","A@gmail.com","I am a stone"],["lance",19,True,True,"BJ","B@gmail.com","I am a cat"],["jimmy",25,True,True,"BJ","C@gmail.com","I am a kitten"]]
+    # # initialize the pinecone index
+    # index = pinecone_init('socialvegan')
     
-    db = [] # database
-    for i in preset_data:
-        try:
-            db.append(Person(i[0],i[1],i[2],i[3],i[4],i[5],i[6]))
-        except ValueError as e:
-            print(f"Error: {e}")
-            '''API COMMUNICATIONS HERE'''
+    # # insert the vectors into pinecone index
+    # for i in ids:
+    #     pinecone_vector_upsert(i, index)
+    #     print(f"Inserted {i} into pinecone successfully")
     
-    print(db)
-    '''usr input'''
-    '''for each new user input, create a new Person object, add it into db[]'''
+    # # for every entry, query its k nearest neighbors
+    # for i in ids:
+    #     pinecone_query(index, i, 3)
+    #     print(f"Queried {i} in pinecone successfully")
     
-    with open("data.txt", "w") as f:
-        f.write(str(pinecone_fetch(db[0], pinecone_index)))
+    # # print the results without vector col
+    # db_print_without_vector('user.db')
     
-    for i in db:
-        pinecone_vector_upsert(i, pinecone_index)
-    
-    print(pinecone_index.describe_index_stats())
-    
-    '''QUERYING'''
-    qperson = db[0]
-    qresult = pinecone_query(pinecone_index, qperson, 3)
-    
-    '''PRINTING RESULTS'''
-    print(qresult)
-    print()
-    
-    '''FINDING INFORMATION OF MATCHES'''
-
-    for j in qresult:
-        qperson.match_result_id.append(j[0]) # adding matched result into the person database
-        best_match = qresult[1]
-        himself = qresult[0]
-        if j==himself:
+    # getting the final results
+    user_id = ids[0]
+    database_path = 'user.db'
+    user_name = db_data_read(user_id, 'name', database_path)
+    user_exp = db_data_read(user_id, 'expectation', database_path)
+    user_match_result =  json.loads(db_data_read(user_id,'match_result_id', database_path)) # matched id and score, enclosed in list
+    for i in user_match_result:
+        matched_id, matched_score = i[0], i[1] #TODO json.loads(i)
+        if user_id == matched_id:
             continue
-        elif j == best_match:
-            print("This is your best match!")
-        name, email = j[0].split("#")
-        score = j[1]
-        num = 0
-        count = -1
-        for i in db:
-            count += 1
-            if i.name == name and i.email == email:
-                num = count
-                break
-        matched = db[num]
-        print(f"{matched.name} has score {score} and his/her email is {matched.email}.")
-        print(f"{matched.name}'s expectation is {matched.expectation}")
+        else:
+            matched_name, matched_exp = db_data_read(matched_id, 'name', database_path), db_data_read(matched_id, 'expectation', database_path)
+            prompt = f"My expectation is '{user_exp}', and his/her expectation is '{matched_exp}'. Why are we a good match?"
+            result = chatbot_completion(prompt)
+        
+        print(f"You ({user_name}) are matched with {matched_name} with a score of {matched_score}!")
+        print(f"Your expectation is: {user_exp}")
+        print(f"{matched_name}'s expectation is: {matched_exp}")
+        print(result)
         print()
+        print()
+
+def test():
+    ids = db_get_all_ids('user.db')
+    user_id = ids[0]
+    database_path = 'user.db'
+    user_match_result =  db_data_read(user_id,'match_result_id', database_path) # matched id and score, enclosed in list)
+    user_match_result_lst = json.loads(user_match_result)
+    for i in user_match_result_lst:
+        print(i)
         
 
 if __name__ == '__main__':
+    # test()
     main()

@@ -64,6 +64,21 @@ def db_data_update(id: str, info: str, new_value: Any, database: str) -> None:
 
         cursor.execute(f"UPDATE persons SET {info} = ? WHERE id = ?", (new_value, id))
 
+def db_matched_id_update(id: str, new_value_pair: list, database: str) -> None:
+    '''Update only the matched_id part for certain id in the SQLite database'''
+    # grab the original match_result_id and then add the list to it direct, list1+list2
+    matched_lst = json.loads(db_data_read(id, 'match_result_id', database))
+    print(matched_lst)
+    matched_lst.append(new_value_pair)
+    print(matched_lst)
+    new_lst = json.dumps(matched_lst)
+    
+    with sqlite3.connect(database) as conn:
+        cursor = conn.cursor()
+
+        cursor.execute(f"UPDATE persons SET match_result_id = ? WHERE id = ?", (new_lst, id))
+
+
 def db_print_all(database: str) -> None:
     '''Print all data in the SQLite database'''
     with sqlite3.connect(database) as conn:
@@ -75,6 +90,21 @@ def db_print_all(database: str) -> None:
     for row in result:
         print(row)
     return None
+
+
+def db_print_without_vector(database: str) -> None:
+    '''Print all data in the SQLite database without the vector column'''
+    with sqlite3.connect(database) as conn:
+        cursor = conn.cursor()
+
+        # Assuming you know the column names and 'vector' is one of them
+        # Modify the column list as per your table schema
+        cursor.execute("SELECT id, name, age, man, hetero, city, email, expectation, wordcount, match_result_id, token_cost FROM persons")
+        results = cursor.fetchall()
+
+        # Print the results
+        for row in results:
+            print(row) 
         
 def print_entire_database(db_path):
     # Connect to the SQLite database
@@ -129,6 +159,15 @@ def db_print_all_ids(database: str) -> None:
         print(row[0])
     return None
 
+def db_get_all_ids(database: str) -> list:
+    '''Get all ids in the SQLite database'''
+    with sqlite3.connect(database) as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT id FROM persons")
+        result = cursor.fetchall()
+
+    return [row[0] for row in result] if result else None
+
 def db_delete_id(id: str, database: str) -> None:
     '''Delete a certain id from the SQLite database'''
     with sqlite3.connect(database) as conn:
@@ -141,7 +180,7 @@ def db_reset(database: str) -> None:
     '''Reset the SQLite database'''
     with sqlite3.connect(database) as conn:
         cursor = conn.cursor()
-        
+ 
         cursor.execute("DROP TABLE IF EXISTS persons")
     return None
 

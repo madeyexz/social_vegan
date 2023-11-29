@@ -1,42 +1,43 @@
-import sqlite_module # to interact with database
-import openai
+from sqlite_module import * # to interact with database
 import os # to access environment variables
+from openai import OpenAI
 
-# initialize connection to OpenAI (get API key at https://beta.openai.com/)
 
-def chatbot_completion(prompt, model="gpt-3.5-turbo-1106", max_tokens=400, temperature=0.4, top_p=1, frequency_penalty=0, presence_penalty=0):
-    """
-    Perform a completion task using OpenAI's language models.
-    :param prompt: The input text to complete.
-    :param model: The model to use (e.g., "text-davinci-003").
-    :param max_tokens: The maximum number of tokens to generate.
-    :param temperature: Controls randomness. Higher is more random.
-    :param top_p: Nucleus sampling. Lower means more focused; 1 is no limit.
-    :param frequency_penalty: Discourages repetition.
-    :param presence_penalty: Encourages new concepts.
-    :return: The completed text.
-    """
+def chatbot_completion(prompt, model="gpt-3.5-turbo-1106"): # gpt-4-1106-preview
+    """use ChatGPT to answer a prompt"""
     try:   
-        openai.api_key = os.environ["OPENAI_API_KEY"]
-        response = openai.ChatCompletion.create(
-        model=model,
+        client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+        response = client.chat.completions.create(model=model,
         messages=[
-            {"role": "system", "content": "You are a helpful translation assistant."},
-            {"role": "user", "content": "Translate 'hi' in to French"},
-            {"role": "assistant", "content": "Bonjour"},
+            # {"role": "system", "content": ""},
+            # {"role": "user", "content": ""},
+            # {"role": "assistant", "content": ""},
+            {"role": "system", "content": "You are a helpful assistant that will explain why two people's expectations are similar to each others, and why they might make a good pair (friend/couple/soul mate or whatever). You will give five reasons why so, and format them in bullet points."},
             {"role": "user", "content": f"{prompt}."},
         ],
-        temperature=0,
-    )
-        return response['choices'][0]['message']['content']
+        temperature=0)
+        return response.choices[0].message.content
     
     except Exception as e:
         print(f"An error occurred: {e}")
         return None
 
-# Set your API key here
-
-# Example usage
-prompt = "Translate the following English text to French: 'Hello, how are you?'"
-result = chatbot_completion(prompt)
-print(result)
+def main():
+    # usage
+    user_id = 'jimmy#C@gmail.com'
+    database_path = 'user.db'
+    user_exp = db_data_read(user_id, 'expectation', database_path)
+    user_match_result =  db_data_read(user_id,'match_result_id', database_path) # matched id and score, enclosed in list
+    for i in user_match_result:
+        matched_id, matched_score = i[0], i[1]
+        matched_name, matched_exp = db_data_read(matched_id, 'name', database_path), db_data_read(matched_id, 'expectation', database_path)
+        prompt = f"My expectation is '{user_exp}', and his/her expectation is '{matched_exp}'. Why are we a good match?"
+        result = chatbot_completion(prompt)
+        
+        print(f"You are matched with {matched_name} with a score of {matched_score}!")
+        print(f"Your expectation is: {user_exp}")
+        print(f"{matched_name}'s expectation is: {matched_exp}")
+        print(result)
+    
+if __name__ == '__main__':
+    main()
