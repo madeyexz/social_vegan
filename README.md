@@ -35,6 +35,7 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
@@ -82,6 +83,15 @@ In this version, we collect users' core value on intimate relationship (limited 
 ## Getting Started
 
 To get a local copy up and running follow these simple example steps.
+### Prerequisites
+1. get an OpenAI api key at [OpenAI](https://platform.openai.com).
+2. get a Pinecone api key at [Pinecone](https://www.pinecone.io/)
+3. create a Pinecone index on [Pinecone dashboard](https://app.pinecone.io), and set the index name to `socialvegan`.
+4. export the API_KEYs to environment variables
+    ```bash
+    export OPENAI_API_KEY=<your key>
+    export PINECONE_API_KEY=<your key>
+    ```
 
 ### Installation
 1. clone this repo to your local machine
