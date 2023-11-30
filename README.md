@@ -1,21 +1,207 @@
-# Social Vegan
+<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+<a name="readme-top"></a>
+<!--
+*** Thanks for checking out the Best-README-Template. If you have a suggestion
+*** that would make this better, please fork the repo and create a pull request
+*** or simply open an issue with the tag "enhancement".
+*** Don't forget to give the project a star!
+*** Thanks again! Now go create something AMAZING! :D
+-->
 
-A [BackDrop Build](http://backdropbuild.com) project, for more BDB projects, visit [here](https://backdropbuild.com/v2/directory).
 
-**Limitations & Risks**
 
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
+
+
+
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#walkthrough">Walkthough</a></li>
+        <ul>
+        <li><a href="#1-match-making-tool">Match-making Tool</a></li>
+        <li><a href="#2-bulk-email-sending-tool">Bulk Email Sending Tool</a></li>
+        </ul>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
+
+
+
+<!-- ABOUT THE PROJECT -->
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+<!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
+
+
+*Socail Vegan* is essentially a dating app for serious daters with embeddings and vector database. It's a project to explore the possibility of using OpenAI's embedding model to build match-making services.
+
+
+In this version, we collect users' core value on intimate relationship (limited to 100 words, stored in the variable `expectation`), pip this into OpenAI's `text-embedding-ada-002` model, and store the vectors (or the embeddings) on Pinecone vector database and local database (`SQLite3` based). For each user's vector, we then retrieve the nearest `2` vectors from the database, which represent people with most similar expecatation, and return the corresponding `user_id`s as match results. Using the `user_id`s, we can then retrieve the user's profile from the database, display it to the user, compare it to the users and finally let them decide whether to contact the other person.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+### Built With
+
+ - Python, as the main programming language.
+ - OpenAI
+   - `text-embedding-ada-002` model, as the main embedding model.
+   - `gpt-3.5-turbo-1106` model, to perform completion task
+ - Pinecone, as the vector database.
+ - SQLite3, as the local database
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+To get a local copy up and running follow these simple example steps.
+
+### Installation
+1. clone this repo to your local machine
+    ```bash
+    git clone https://github.com/madeyexz/social_vegan.git 
+    ```
+2. Install the dependencies
+    ``` bash
+    pip install openai, pinecone, sqlite3, tenacity
+    ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- USAGE EXAMPLES -->
+## Usage
+
+In `main.py`, you will find the following code snippet:
+```python
+# main.py
+# ...
+def main():
+  preset_data = [
+        ["James",
+        34,
+        True,
+        True,
+        "US",
+        "james34@example.com",
+        "In an intimate relationship, I value honesty and communication above all. Trust is the foundation of any strong relationship, and it's something I take very seriously. I believe in being open and transparent with my partner, sharing thoughts, feelings, and experiences freely. Mutual respect is also paramount; respecting each other's individuality, space, and opinions helps in nurturing a healthy bond. I also think it's important to support each other's goals and dreams, as growing together strengthens the relationship. Lastly, a sense of humor and the ability to enjoy life's simple moments together make every day special."],
+        ["Sophia",
+        28,
+        False,
+        True,
+        "UK",
+        "sophia28@example.co.uk",
+        "core value on intimate relationship",]
+        # and some more
+  ]
+# ...
+```
+
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- Known Issues -->
+
+## Know Issues
+- [ ] You can't specity homosexual or heterosexual results (it's a bug), and as of current do not support non-binary genders.
+- [ ] The embedding model is prone to `Rate Limit Error`
+
+<!-- ROADMAP -->
+## Roadmap
+
+- [ ] Create a UI, or a web interface
+- [ ] Allow custom user input
+- [ ] Collect user feedback
+    - [ ] Tweak the GPT prompt to make it more suitable for the task
+    - [ ] Try out different the user input (i.e. the `expectation` collected) to find out what's best for dating.
+
+See the [open issues](https://github.com/madeyexz/social_vegan/issues) for a full list of proposed features (and known issues).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Limitations & Risks
 This project ultilizes the OpenAI second generation embedding model `text-embedding-ada-002`, the limitations & risks of using the model is described [here](https://platform.openai.com/docs/guides/embeddings/limitations-risks). Some key points are:
 - The models encode social biases, e.g. via stereotypes or negative sentiment towards certain groups.
 - Models lack knowledge of events that occurred after [Sep 2021](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings?lang=python).
 
-**Specs**
-- Semantic space dimension = `1536`.
 
-retrieve K nearest embedding vectors
 
-**Know Issues**
-- You can't specity homosexual or heterosexual results (it's a bug).
-- \[fixed\] Prone to Rate Limit Error, 
+<!-- CONTRIBUTING -->
+## Contributing
 
-**TO-DO**
-- fix the prompt
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the GNU Affero General Public License v3.0. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- CONTACT -->
+## Contact
+
+- Email me: [ian.xiao@stu.pku.edu.cn](emailto:ian.xiao@stu.pku.edu.cn)
+
+- Project Link: [PKU_SICA_TPIS_tool](https://github.com/madeyexz/PKU_SICA_TPIS_tool)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+* [a link]()
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>

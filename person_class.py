@@ -13,11 +13,11 @@ client = openai.OpenAI()
 ''''NEEDS API COMMUNICATION: CREATING A PERSON'''
 '''RECORD EACH PERSON'S CREATION TIME, WE HAVE RATE LIMITS OF 3 REQUEST PER MINUTE AND 200 REQUESTS PER DAY'''
 
-@retry(wait=wait_random_exponential(min=25, max=300), stop=stop_after_attempt(6))
+@retry(wait=wait_random_exponential(min=25, max=500), stop=stop_after_attempt(8))
 def embeddings_with_backoff(input_text):
     return client.embeddings.create(
         input = input_text,
-        model = "text-embedding-ada-002"
+        model = "text-embedding-ada-002" # text-embedding-ada-002
     )   
 
 class Person:
