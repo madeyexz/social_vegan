@@ -136,7 +136,7 @@ To get a local copy up and running follow these simple example steps.
 
     An example of `expectation` is: 
 
-    *In an intimate relationship, I value honesty and communication above all. Trust is the foundation of any strong relationship, and it's something I take very seriously. I believe in being open and transparent with my partner, sharing thoughts, feelings, and experiences freely. Mutual respect is also paramount; respecting each other's individuality, space, and opinions helps in nurturing a healthy bond. I also think it's important to support each other's goals and dreams, as growing together strengthens the relationship. Lastly, a sense of humor and the ability to enjoy life's simple moments together make every day special.*
+    >*In an intimate relationship, I value honesty and communication above all. Trust is the foundation of any strong relationship, and it's something I take very seriously. I believe in being open and transparent with my partner, sharing thoughts, feelings, and experiences freely. Mutual respect is also paramount; respecting each other's individuality, space, and opinions helps in nurturing a healthy bond. I also think it's important to support each other's goals and dreams, as growing together strengthens the relationship. Lastly, a sense of humor and the ability to enjoy life's simple moments together make every day special.*
 
 2. Modify the person you want to query at the end of the file by changing the index
 
