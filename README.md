@@ -161,8 +161,25 @@ To get a local copy up and running follow these simple example steps.
     ```
 
 4. You should see results like this
-![screenshot_1](https://github.com/madeyexz/social_vegan/blob/main/screenshots/result_1.png)
-![screenshot_2](https://github.com/madeyexz/social_vegan/blob/main/screenshots/result_2.png)
+  ``` plaintext
+  You (Aisha) are matched with James with a score of 0.954092443!
+  Your expectation is: I believe the core of any intimate relationship is mutual respect and empathy. Understanding and caring for each other's emotional and physical well-being is paramount. I value honesty and integrity; being truthful and upfront builds trust. I also look for a sense of humor and light-heartedness in a partner, as I believe laughter and joy are essential in life. Supporting each other's ambitions and being each other's cheerleader in life's journey is something I hold in high regard.
+  James's expectation is: In an intimate relationship, I value honesty and communication above all. Trust is the foundation of any strong relationship, and it's something I take very seriously. I believe in being open and transparent with my partner, sharing thoughts, feelings, and experiences freely. Mutual respect is also paramount; respecting each other's individuality, space, and opinions helps in nurturing a healthy bond. I also think it's important to support each other's goals and dreams, as growing together strengthens the relationship. Lastly, a sense of humor and the ability to enjoy life's simple moments together make every day special., and his/her email is james34@example.com
+  It sounds like you and this person have similar expectations and values when it comes to intimate relationships. Here are five reasons why you might make a good match:
+
+  - Mutual respect and empathy: Both of you prioritize mutual respect and empathy in a relationship, showing that you are both considerate of each other's feelings and well-being.
+
+  - Honesty and transparency: You both value honesty and open communication, which creates a foundation of trust and understanding in the relationship.
+
+  - Support for each other's ambitions: Both of you emphasize the importance of supporting each other's goals and dreams, indicating that you are both willing to be each other's cheerleaders in life's journey.
+
+  - Sense of humor and enjoyment of life: You both appreciate a sense of humor and the ability to enjoy life's simple moments, suggesting that you can find joy and laughter in each other's company.
+
+  - Shared values in nurturing a healthy bond: Your expectations align in respecting each other's individuality, space, and opinions, indicating that you both understand the importance of nurturing a healthy and balanced relationship.
+  ```
+
+- ![screenshot_1](https://github.com/madeyexz/social_vegan/blob/main/screenshots/result_1.png)
+- ![screenshot_2](https://github.com/madeyexz/social_vegan/blob/main/screenshots/result_2.png)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
