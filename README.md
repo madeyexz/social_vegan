@@ -35,21 +35,16 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
+    <li><a href="#known-issues">Known Issues</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#walkthrough">Walkthough</a></li>
-        <ul>
-        <li><a href="#1-match-making-tool">Match-making Tool</a></li>
-        <li><a href="#2-bulk-email-sending-tool">Bulk Email Sending Tool</a></li>
-        </ul>
+    <li><a href="#limitations-and-risks">Limitations and Risks</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -178,8 +173,10 @@ To get a local copy up and running follow these simple example steps.
   - Shared values in nurturing a healthy bond: Your expectations align in respecting each other's individuality, space, and opinions, indicating that you both understand the importance of nurturing a healthy and balanced relationship.
   ```
 
-- ![screenshot_1](https://github.com/madeyexz/social_vegan/blob/main/screenshots/result_1.png)
-- ![screenshot_2](https://github.com/madeyexz/social_vegan/blob/main/screenshots/result_2.png)
+![screenshot_1](https://github.com/madeyexz/social_vegan/blob/main/screenshots/result_1.png)
+
+
+![screenshot_2](https://github.com/madeyexz/social_vegan/blob/main/screenshots/result_2.png)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -187,7 +184,7 @@ To get a local copy up and running follow these simple example steps.
 
 <!-- Known Issues -->
 
-## Know Issues
+## Known Issues
 - [ ] You can't specity homosexual or heterosexual results (it's a bug), and as of current do not support non-binary genders.
 - [ ] The embedding model is prone to `Rate Limit Error`
 
@@ -204,7 +201,7 @@ See the [open issues](https://github.com/madeyexz/social_vegan/issues) for a ful
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Limitations & Risks
+## Limitations and Risks
 This project ultilizes the OpenAI second generation embedding model `text-embedding-ada-002`, the limitations & risks of using the model is described [here](https://platform.openai.com/docs/guides/embeddings/limitations-risks). Some key points are:
 - The models encode social biases, e.g. via stereotypes or negative sentiment towards certain groups.
 - Models lack knowledge of events that occurred after [Sep 2021](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings?lang=python).
@@ -242,16 +239,6 @@ Distributed under the GNU Affero General Public License v3.0. See `LICENSE.txt` 
 
 - Email me: [ian.xiao@stu.pku.edu.cn](emailto:ian.xiao@stu.pku.edu.cn)
 
-- Project Link: [PKU_SICA_TPIS_tool](https://github.com/madeyexz/PKU_SICA_TPIS_tool)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* [a link]()
-
+- Project Link: [Social Vegan](https://github.com/madeyexz/social_vegan)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
