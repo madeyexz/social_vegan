@@ -105,31 +105,64 @@ To get a local copy up and running follow these simple example steps.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-In `main.py`, you will find the following code snippet:
-```python
-# main.py
-# ...
-def main():
-  preset_data = [
-        ["James",
-        34,
-        True,
-        True,
-        "US",
-        "james34@example.com",
-        "In an intimate relationship, I value honesty and communication above all. Trust is the foundation of any strong relationship, and it's something I take very seriously. I believe in being open and transparent with my partner, sharing thoughts, feelings, and experiences freely. Mutual respect is also paramount; respecting each other's individuality, space, and opinions helps in nurturing a healthy bond. I also think it's important to support each other's goals and dreams, as growing together strengthens the relationship. Lastly, a sense of humor and the ability to enjoy life's simple moments together make every day special."],
-        ["Sophia",
-        28,
-        False,
-        True,
-        "UK",
-        "sophia28@example.co.uk",
-        "core value on intimate relationship",]
-        # and some more
-  ]
-# ...
-```
+1. Modify the user data (as of current, the preset data)
 
+    In `main.py`, you will find the following code snippet:
+    ```python
+    # main.py
+    # ...
+    def main():
+      # ...
+      preset_data = [
+            ["James",
+            34,
+            True,
+            True,
+            "US",
+            "james34@example.com",
+            "Jame's core value"],
+            ["Sophia",
+            28,
+            False,
+            True,
+            "UK",
+            "sophia28@example.co.uk",
+            "Sophia's core value",]
+            # and some more
+      ]
+    # ...
+    ```
+    Each person's data is stored in the `preset_data` list, and each person's data is stored in a list. The order of the data is as follows:
+
+    `[name, age, is_male, is_heterosexual, city, email, expectation]`
+
+    You can modified preset data
+    - the number of the preset datas is *unlimited*, but keep in mind that large number of data will slow down the program, as we will encounter `RateLimitError` when we try to embed the data.
+
+    An example of `expectation` is: 
+
+    *In an intimate relationship, I value honesty and communication above all. Trust is the foundation of any strong relationship, and it's something I take very seriously. I believe in being open and transparent with my partner, sharing thoughts, feelings, and experiences freely. Mutual respect is also paramount; respecting each other's individuality, space, and opinions helps in nurturing a healthy bond. I also think it's important to support each other's goals and dreams, as growing together strengthens the relationship. Lastly, a sense of humor and the ability to enjoy life's simple moments together make every day special.*
+
+2. Modify the person you want to query at the end of the file by changing the index
+
+    ```python
+    # main.py
+    # ...
+    def main():
+      # ...
+      # get the result of person with index 0
+      user_id = ids[0]
+      # ...
+    ```
+
+3. Run the program
+    ```bash
+    python3 main.py
+    ```
+
+4. You should see results like this
+![screenshot_1](https://github.com/madeyexz/social_vegan/blob/main/screenshots/result_1.png)
+![screenshot_2](https://github.com/madeyexz/social_vegan/blob/main/screenshots/result_2.png)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
